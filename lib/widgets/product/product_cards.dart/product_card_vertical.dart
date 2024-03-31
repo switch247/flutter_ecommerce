@@ -9,6 +9,7 @@ import 'package:t_store/widgets/images/rounded_image.dart';
 import '../../../features/shop/screens/product_details.dart';
 import '../../../utils/constants/colors.dart';
 import '../../container/rounded_container.dart';
+import '../../icon/add_to_cart_plus.dart';
 import '../../icon/circular_icon.dart';
 import '../../texts/brand_title_verify.dart';
 import '../../texts/card_title_text.dart';
@@ -31,6 +32,7 @@ class ProductCardVertical extends StatelessWidget {
             borderRadius: BorderRadius.circular(TSizes.productImageRadius),
             color: dark ? TColors.darkGrey : TColors.white),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // image
             TRoundedContainer(
@@ -105,22 +107,7 @@ class ProductCardVertical extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: TColors.dark,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(TSizes.cardRadiusMd),
-                        bottomRight: Radius.circular(TSizes.productImageRadius),
-                      )),
-                  child: SizedBox(
-                    height: TSizes.iconLg * 1.2,
-                    width: TSizes.iconLg * 1.2,
-                    child: const Icon(
-                      Iconsax.add,
-                      color: TColors.white,
-                    ),
-                  ),
-                )
+                AddToCartIcon(),
               ],
             )
           ],

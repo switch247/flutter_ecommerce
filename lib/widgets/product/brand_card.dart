@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:t_store/utils/helpers/helper_functions.dart';
 
 import '../../utils/constants/enums.dart';
 import '../../utils/constants/image_strings.dart';
@@ -10,19 +11,19 @@ import '../texts/brand_title_verify.dart';
 class BrandCard extends StatelessWidget {
   const BrandCard({
     super.key,
-    required this.dark,
     this.image = TImages.clothIcon,
     this.title = 'Brand Name ',
     this.subTitle = '256',
+    this.onTap,
   });
 
-  final bool dark;
   final String image, title, subTitle;
-
+  final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return GestureDetector(
-        onTap: () {},
+        onTap: onTap,
         child: TRoundedContainer(
           padding: const EdgeInsets.all(TSizes.sm),
           showBorder: true,

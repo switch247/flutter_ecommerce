@@ -24,6 +24,8 @@ class SuccessScreen extends StatelessWidget {
         padding: EdgeInsets.all(TSizes.defaultSpace),
         child: Column(
           children: [
+            SizedBox(height: TSizes.spaceBtwSections),
+
             Image(
               image: AssetImage(image),
               width: THelperFunctions.screenWidth() * 0.6,

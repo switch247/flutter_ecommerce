@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/widgets/layout/grid_layout.dart';
 import 'package:t_store/widgets/tabbar.dart';
 import 'package:t_store/widgets/texts/section_header.dart';
+import '../../../widgets/product/cart/cart_menu_icon.dart';
 import '../../../widgets/shop/search_container.dart';
 import '../../../widgets/product/catagory_tab.dart';
-import '../../../widgets/product/cart_menu_icon.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../widgets/product/brand_card.dart';
 import '../../../widgets/appbar.dart';
+import 'all_brands.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -40,7 +42,7 @@ class StoreScreen extends StatelessWidget {
           ),
           actions: [
             TCartCounterIcon(
-              iconColor: TColors.white,
+              iconColor: dark ? TColors.white : TColors.black,
               onPressed: () {},
             )
           ],
@@ -73,7 +75,9 @@ class StoreScreen extends StatelessWidget {
 
                         // featured brands
                         TSectionHeading(
-                            showActionButton: true, title: 'Featured Brands'),
+                            onPressed: () => Get.to(AllBrandsScreen()),
+                            showActionButton: true,
+                            title: 'Featured Brands'),
 
                         const SizedBox(height: TSizes.spaceBtwItems / 1.5),
 
@@ -81,8 +85,7 @@ class StoreScreen extends StatelessWidget {
                             mainAxisExtent: 80,
                             itemCount: 2,
                             itemBuilder: (_, index) {
-                              return BrandCard(
-                                  dark: dark, image: TImages.clothIcon);
+                              return BrandCard(image: TImages.clothIcon);
                             }),
                       ],
                     ),

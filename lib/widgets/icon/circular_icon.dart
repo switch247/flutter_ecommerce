@@ -6,7 +6,7 @@ import '../../utils/constants/sizes.dart';
 class CIrcularIcon extends StatelessWidget {
   final double? width, height;
   final IconData icon;
-  final Size = TSizes.lg;
+  final double size;
   final Color? color, backgroundColor;
   final VoidCallback? onPressed;
 
@@ -19,6 +19,7 @@ class CIrcularIcon extends StatelessWidget {
     this.color,
     this.backgroundColor,
     this.onPressed,
+    this.size = TSizes.lg,
   });
 
   final bool dark;
@@ -38,6 +39,7 @@ class CIrcularIcon extends StatelessWidget {
       child: IconButton(
         onPressed: onPressed,
         icon: Icon(
+          size: size,
           icon,
           color: color,
         ),

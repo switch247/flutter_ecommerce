@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
+import 'package:t_store/features/shop/screens/product_review.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/helpers/helper_functions.dart';
-
 
 import 'package:t_store/widgets/appbar.dart';
 import 'package:t_store/widgets/container/rounded_container.dart';
@@ -17,7 +17,6 @@ import 'package:t_store/widgets/shop/curved_edge_widget.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../utils/constants/enums.dart';
 import '../../../widgets/texts/brand_title_verify.dart';
-
 
 import 'package:t_store/widgets/texts/section_header.dart';
 import '../../../widgets/product/product_details/add_to_cart_bottom.dart';
@@ -92,9 +91,13 @@ class ProductDetailsScreen extends StatelessWidget {
                     Divider(),
                     const SizedBox(height: TSizes.spaceBtwSections),
                     TSectionHeading(
-                        showActionButton: false, title: 'Reviews(120)'),
+                      showActionButton: false,
+                      title: 'Reviews(120)',
+                    ),
+                    IconButton(
+                        onPressed: () => Get.to(const ProductReviewScreen()),
+                        icon: const Icon(Iconsax.activity)),
                     const SizedBox(height: TSizes.spaceBtwSections),
-                    
                   ],
                 ),
               )
@@ -102,7 +105,6 @@ class ProductDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
-    
       bottomNavigationBar: TBottomAddToCart(),
     );
   }

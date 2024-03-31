@@ -28,11 +28,7 @@ class TBrandShowcase extends StatelessWidget {
       padding: EdgeInsets.all(TSizes.sm),
       margin: const EdgeInsets.only(bottom: TSizes.spaceBtwItems),
       child: Column(children: [
-        BrandCard(
-            dark: dark,
-            image: TImages.clothIcon,
-            title: title,
-            subTitle: subTitle),
+        BrandCard(image: TImages.clothIcon, title: title, subTitle: subTitle),
         const SizedBox(
           height: 5,
         ),

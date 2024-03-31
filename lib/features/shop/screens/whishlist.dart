@@ -6,6 +6,7 @@ import 'package:t_store/utils/helpers/helper_functions.dart';
 import 'package:t_store/widgets/appbar.dart';
 import 'package:t_store/widgets/layout/grid_layout.dart';
 
+import '../../../navigation_menu.dart';
 import '../../../widgets/icon/circular_icon.dart';
 import '../../../widgets/product/product_cards.dart/product_card_vertical.dart';
 import 'home.dart';
@@ -24,7 +25,7 @@ class WishListScreen extends StatelessWidget {
           CIrcularIcon(
             icon: Iconsax.add,
             dark: dark,
-            onPressed: () => Get.to(const HomeScreen()),
+            onPressed: () => Get.offAll(() => const NavigationMenu()),
           )
         ],
       ),
