@@ -4,13 +4,16 @@ import 'package:t_store/features/authentication/screens/login.dart';
 import 'package:t_store/features/authentication/screens/reset_password.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/utils/validators/validation.dart';
 import '../../../utils/constants/sizes.dart';
+import '../controllers/reset_password_controller.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
         appBar: AppBar(),
         body: SingleChildScrollView(
@@ -30,6 +33,8 @@ class ForgetPassword extends StatelessWidget {
                 SizedBox(height: TSizes.spaceBtwSections),
 
                 TextFormField(
+                  controller: controller.email,
+                  validator: TValidator.validateEmail,
                   decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.mail_outline),
                       labelText: TTexts.email),
@@ -40,16 +45,18 @@ class ForgetPassword extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => Get.to(
-                      () => ResetPassword(
-                        image: TImages.deliveredEmailIllustration,
-                        title: TTexts.changeYourPasswordTitle,
-                        subTitle: TTexts.changeYourPasswordSubTitle,
-                        onPressed: () => Get.to(
-                          () => const LoginScreen(),
-                        ),
-                      ),
-                    ),
+                    onPressed: () => controller
+                        .sendPasswordResetEmail(controller.email.text.trim()),
+                    // onPressed: () => Get.to(
+                    //   () => ResetPassword(
+                    //     image: TImages.deliveredEmailIllustration,
+                    //     title: TTexts.changeYourPasswordTitle,
+                    //     subTitle: TTexts.changeYourPasswordSubTitle,
+                    //     onPressed: () => Get.to(
+                    //       () => const LoginScreen(),
+                    //     ),
+                    //   ),
+                    // ),
                     child: Text(TTexts.submit),
                   ),
                 ),

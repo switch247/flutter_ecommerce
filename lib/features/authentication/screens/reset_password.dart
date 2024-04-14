@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:t_store/features/authentication/controllers/reset_password_controller.dart';
 
+import '../../../utils/constants/image_strings.dart';
 import '../../../utils/constants/sizes.dart';
 import '../../../utils/constants/text_strings.dart';
 import '../../../utils/helpers/helper_functions.dart';
@@ -10,11 +12,12 @@ import 'login.dart';
 class ResetPassword extends StatelessWidget {
   const ResetPassword(
       {super.key,
-      required this.image,
-      required this.title,
-      required this.subTitle,
-      this.onPressed});
-
+      this.image = TImages.deliveredEmailIllustration,
+      this.title = TTexts.changeYourPasswordTitle,
+      this.subTitle = TTexts.changeYourPasswordSubTitle,
+      this.onPressed,
+      required this.email});
+  final String email;
   final String image, title, subTitle;
   final VoidCallback? onPressed;
   @override
@@ -59,7 +62,9 @@ class ResetPassword extends StatelessWidget {
                   width: double.infinity,
                   child: OutlinedButton(
                     onPressed: () {
-                      Get.to(LoginScreen());
+                      ForgetPasswordController.instance
+                          .sendPasswordResetEmail(email);
+                      // Get.to(LoginScreen());
                     },
                     child: Text(TTexts.resendEmail),
                   ),

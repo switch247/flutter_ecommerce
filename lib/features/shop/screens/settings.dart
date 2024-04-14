@@ -9,7 +9,9 @@ import 'package:t_store/widgets/appbar.dart';
 import 'package:t_store/widgets/shop/primary_header_container.dart';
 import 'package:t_store/widgets/texts/section_header.dart';
 
+import '../../../data/repositories.authentication/authentication/authentication_repository.dart';
 import '../../../utils/constants/sizes.dart';
+import '../../../utils/constants/text_strings.dart';
 import '../../../widgets/list_tiles/profile_tile.dart';
 
 import 'package:t_store/utils/constants/image_strings.dart';
@@ -24,6 +26,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+    final controller = Get.put(AuthenticationRepository());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -92,6 +95,13 @@ class SettingsScreen extends StatelessWidget {
                       subTitle: 'manage data usage and connected accounts',
                       onTap: () {}),
                   const SizedBox(height: TSizes.defaultSpace),
+                  TSettingsMenuTile(
+                      dark: dark,
+                      icon: Iconsax.home,
+                      title: 'Account Privacy',
+                      subTitle: 'Manage Data Usage and Connected accounts',
+                      onTap: () {}),
+                  const SizedBox(height: TSizes.defaultSpace),
                   TSectionHeading(
                       textColor: dark ? Colors.white : Colors.black,
                       showActionButton: false,
@@ -100,9 +110,38 @@ class SettingsScreen extends StatelessWidget {
                   TSettingsMenuTile(
                       dark: dark,
                       icon: Iconsax.home,
-                      title: 'Account Privacy',
-                      subTitle: 'Chage Delivery Adress',
+                      title: 'Load Data',
+                      subTitle: 'upload data to your Cloud FireBase',
                       onTap: () {}),
+                  const SizedBox(height: TSizes.defaultSpace),
+                  TSettingsMenuTile(
+                      dark: dark,
+                      icon: Iconsax.home,
+                      title: 'Geolocation',
+                      subTitle: 'set my recomendation based on location',
+                      onTap: () {}),
+                  const SizedBox(height: TSizes.defaultSpace),
+                  TSettingsMenuTile(
+                      dark: dark,
+                      icon: Iconsax.home,
+                      title: 'Safemode',
+                      subTitle: 'search result is safe for all ages',
+                      onTap: () {}),
+                  const SizedBox(height: TSizes.defaultSpace),
+                  TSettingsMenuTile(
+                      dark: dark,
+                      icon: Iconsax.home,
+                      title: 'HdImageQuaity',
+                      subTitle: 'set Image quailities to be seen',
+                      onTap: () {}),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton(
+                      // onPressed: () {},
+                      onPressed: () => controller.logout(),
+                      child: Text('Log out'),
+                    ),
+                  ),
                 ],
               ),
             )

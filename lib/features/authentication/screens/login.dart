@@ -6,11 +6,13 @@ import 'package:t_store/features/authentication/screens/signup.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
+import 'package:t_store/utils/validators/validation.dart';
 
 import '../../../navigation_menu.dart';
 import '../../../utils/helpers/helper_functions.dart';
 import '../../../widgets/login_signup/FooterAuthentication.dart';
 import '../../../widgets/login_signup/FormDivider.dart';
+import '../controllers/login_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -86,13 +88,17 @@ class FormLoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginController());
     return Form(
+      key: controller.loginFormKey,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
         child: Column(
           children: [
             // email
             TextFormField(
+              controller: controller.email,
+              validator: (value) => TValidator.validateEmail(value),
               decoration: const InputDecoration(
                   prefixIcon: Icon(Iconsax.diagram), labelText: TTexts.email),
             ),
@@ -101,11 +107,23 @@ class FormLoginPage extends StatelessWidget {
             ),
             // password
 
-            TextFormField(
-              decoration: const InputDecoration(
-                  suffixIcon: Icon(Iconsax.eye_slash),
-                  prefixIcon: Icon(Iconsax.password_check),
-                  labelText: TTexts.password),
+            Obx(
+              () => TextFormField(
+                controller: controller.password,
+                validator: (value) =>
+                    TValidator.validateEmptyText('Password', value),
+                obscureText: controller.hidePassword.value,
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () => controller.hidePassword.value =
+                          !controller.hidePassword.value,
+                      icon: Icon(controller.hidePassword.value
+                          ? Iconsax.eye_slash
+                          : Iconsax.eye),
+                    ),
+                    prefixIcon: Icon(Iconsax.password_check),
+                    labelText: TTexts.password),
+              ),
             ),
 
             const SizedBox(
@@ -116,8 +134,12 @@ class FormLoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
+                  // remember me
                   children: [
-                    Checkbox(value: true, onChanged: (value) {}),
+                    Obx(() => Checkbox(
+                        value: controller.rememberMe.value,
+                        onChanged: (value) => controller.rememberMe.value =
+                            !controller.rememberMe.value)),
                     const Text(TTexts.rememberMe),
                   ],
                 ),
@@ -135,9 +157,7 @@ class FormLoginPage extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  Get.to(NavigationMenu());
-                },
+                onPressed: () => controller.emailAndPasswordSignIn(),
                 child: Text(TTexts.signIn),
               ),
             ),
